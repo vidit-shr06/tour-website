@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust India - Discover Incredible India</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #FF385C;
+            --primary-red-dark: #E31C5F;
+            --text-dark: #222222;
+            --text-medium: #717171;
+            --background-light: #F7F7F7;
+            --border-light: #DDDDDD;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Loading Optimization */
+        img {
+            loading: lazy;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 1000;
+            padding: 20px 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary-red);
+            cursor: pointer;
+        }
+
+        .logo i {
+            font-size: 32px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-red);
+        }
+
+        .btn-book {
+            background: var(--primary-red);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 25px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-book:hover {
+            background: var(--primary-red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 56, 92, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            height: 650px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-slider {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 68px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero p {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-red-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 56, 92, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-dark);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--background-light);
+            padding: 60px 40px;
+        }
+
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary-red);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+
+        /* Destinations Section */
+        .destinations {
+            max-width: 1400px;
+            margin: 80px auto;
+            padding: 0 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-medium);
+        }
+
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .destination-card {
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-image-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            overflow: hidden;
+            border-radius: 16px;
+            background: var(--background-light);
+        }
+
+        .card-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .destination-card:hover .card-image {
+            transform: scale(1.08);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .favorite-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+            transition: transform 0.2s;
+        }
+
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .card-info {
+            padding: 16px 0;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .card-location {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .card-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .card-rating i {
+            color: var(--primary-red);
+        }
+
+        .card-details {
+            color: var(--text-medium);
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .card-dates {
+            color: var(--text-medium);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .card-price {
+            font-size: 16px;
+            color: var(--text-dark);
+        }
+
+        .card-price strong {
+            font-weight: 700;
+        }
+
+        /* Why Choose Us Section */
+        .why-choose {
+            background: var(--background-light);
+            padding: 80px 40px;
+        }
+
+        .why-choose-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: #FFF0ED;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        .feature-icon i {
+            font-size: 36px;
+            color: var(--primary-red);
+        }
+
+        .feature-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            color: var(--text-medium);
+            line-height: 1.8;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            max-width: 1400px;
+            margin: 80px auto;
+            padding: 0 40px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card {
+            background: var(--background-light);
+            padding: 30px;
+            border-radius: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .author-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .author-info p {
+            font-size: 14px;
+            color: var(--text-medium);
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+            padding: 80px 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .newsletter-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .newsletter h2 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .newsletter p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+        }
+
+        .newsletter-btn {
+            padding: 16px 40px;
+            background: white;
+            color: var(--primary-red);
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 60px 40px 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal span,
+        .footer-legal a {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--primary-red);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 24px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero {
+                height: 500px;
+                margin-top: 70px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .destination-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .destinations {
+                padding: 0 24px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-btn {
+                width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Wanderlust India</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#destinations">Destinations</a>
+                <a href="#why-choose">Why Us</a>
+                <a href="#testimonials">Reviews</a>
+                <a href="#contact">Contact</a>
+                <button class="btn-book">Book Now</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&q=80" alt="Taj Mahal" loading="eager">
+            </div>
+            <div class="hero-slide">
+                <img src="https://images.unsplash.com/photo-1609920658906-8223bd289001?w=800&q=80" alt="Kerala Backwaters">
+            </div>
+            <div class="hero-slide">
+                <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800&q=80" alt="Himalayas">
+            </div>
+            <div class="hero-slide">
+                <img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=800&q=80" alt="Rajasthan Desert">
+            </div>
+              <div class="hero-slide">
+                <img src="https://plus.unsplash.com/premium_photo-1661962344178-19930ba15492?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGFkYWtofGVufDB8fDB8fHww" alt="Rajasthan Desert">
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Discover Incredible India</h1>
+            <p>Experience breathtaking destinations, rich culture, and unforgettable adventures</p>
+            <div class="hero-cta">
+                <button class="btn-primary">Explore Packages</button>
+                <button class="btn-secondary">Plan Your Trip</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">50,000+</div>
+                <div class="stat-label">Happy Travelers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">200+</div>
+                <div class="stat-label">Destinations</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4.9★</div>
+                <div class="stat-label">Average Rating</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section class="destinations" id="destinations">
+        <div class="section-header">
+            <h2 class="section-title">✨ Featured Destinations</h2>
+            <p class="section-subtitle">Handpicked experiences across India's most beautiful locations</p>
+        </div>
+
+        <div class="destination-grid">
+            <div class="destination-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.pexels.com/photos/962464/pexels-photo-962464.jpeg" alt="Munnar" class="card-image">
+                    <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                    <div class="card-badge">Guest favorite</div>
+                </div>
+                <div class="card-info">
+                    <div class="card-header">
+                        <div class="card-location">Munnar, Kerala</div>
+                        <div class="card-rating"><i class="fas fa-star"></i> 4.95</div>
+                    </div>
+                    <div class="card-details">Tea plantations & rolling hills</div>
+                    <div class="card-dates">5 nights · Dec 1 – 6</div>
+                    <div class="card-price"><strong>₹15,999</strong> per person</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1711611511942-28bb3e07bab3?w=400&q=75" alt="Lakshadweep" class="card-image">
+                    <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                    <div class="card-badge">Rare find</div>
+                </div>
+                <div class="card-info">
+                    <div class="card-header">
+                        <div class="card-location">Lakshadweep Islands</div>
+                        <div class="card-rating"><i class="fas fa-star"></i> 4.98</div>
+                    </div>
+                    <div class="card-details">Pristine beaches & coral reefs</div>
+                    <div class="card-dates">7 nights · Dec 8 – 15</div>
+                    <div class="card-price"><strong>₹80,000</strong> per person</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400&q=75" alt="Rameshwaram" class="card-image">
+                    <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                </div>
+                <div class="card-info">
+                    <div class="card-header">
+                        <div class="card-location">Rameshwaram, Tamil Nadu</div>
+                        <div class="card-rating"><i class="fas fa-star"></i> 4.89</div>
+                    </div>
+                    <div class="card-details">Ancient temples & spirituality</div>
+                    <div class="card-dates">3 nights · Dec 12 – 15</div>
+                    <div class="card-price"><strong>₹12,999</strong> per person</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=400&q=75" alt="Manali" class="card-image">
+                    <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                    <div class="card-badge">Popular</div>
+                </div>
+                <div class="card-info">
+                    <div class="card-header">
+                        <div class="card-location">Manali, Himachal Pradesh</div>
+                        <div class="card-rating"><i class="fas fa-star"></i> 4.92</div>
+                    </div>
+                    <div class="card-details">Snow peaks & adventure sports</div>
+                    <div class="card-dates">6 nights · Dec 10 – 16</div>
+                    <div class="card-price"><strong>₹22,999</strong> per person</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1609920658906-8223bd289001?w=400&q=75" alt="Alleppey" class="card-image">
+                    <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                    <div class="card-badge">Trending</div>
+                </div>
+                <div class="card-info">
+                    <div class="card-header">
+                        <div class="card-location">Alleppey, Kerala</div>
+                        <div class="card-rating"><i class="fas fa-star"></i> 4.93</div>
+                    </div>
+                    <div class="card-details">Backwaters & houseboat stays</div>
+                    <div class="card-dates">4 nights · Dec 5 – 9</div>
+                    <div class="card-price"><strong>₹18,999</strong> per person</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="card-image-wrapper">
+                    <img src="https://plus.unsplash.com/premium_photo-1661962344178-19930ba15492?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGFkYWtofGVufDB8fDB8fHww" alt="Ladakh" class="card-image">
+                    <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                    <div class="card-badge">Adventure</div>
+                </div>
+                <div class="card-info">
+                    <div class="card-header">
+                        <div class="card-location">Ladakh, J&K</div>
+                        <div class="card-rating"><i class="fas fa-star"></i> 4.97</div>
+                    </div>
+                    <div class="card-details">Himalayan beauty & monasteries</div>
+                    <div class="card-dates">8 nights · Jun 15 – 23</div>
+                    <div class="card-price"><strong>₹45,999</strong> per person</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="card-image-wrapper">
+                    <img src="https://plus.unsplash.com/premium_photo-1661962428918-6a57ab674e23?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Jaisalmer" class="card-image">
+                    <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                </div>
+                <div class="card-info">
+                    <div class="card-header">
+                        <div class="card-location">Jaisalmer, Rajasthan</div>
+                        <div class="card-rating"><i class="fas fa-star"></i> 4.88</div>
+                    </div>
+                    <div class="card-details">Golden fort & desert safari</div>
+                    <div class="card-dates">4 nights · Dec 18 – 22</div>
+                    <div class="card-price"><strong>₹19,999</strong> per person</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400&q=75" alt="Agra" class="card-image">
+                    <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                    <div class="card-badge">Iconic</div>
+                </div>
+                <div class="card-info">
+                    <div class="card-header">
+                        <div class="card-location">Agra, Uttar Pradesh</div>
+                        <div class="card-rating"><i class="fas fa-star"></i> 4.91</div>
+                    </div>
+                    <div class="card-details">Taj Mahal & Mughal heritage</div>
+                    <div class="card-dates">2 nights · Dec 3 – 5</div>
+                    <div class="card-price"><strong>₹9,999</strong> per person</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.pexels.com/photos/88212/pexels-photo-88212.jpeg" alt="Goa" class="card-image">
+                    <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                    <div class="card-badge">Beach Paradise</div>
+                </div>
+                <div class="card-info">
+                    <div class="card-header">
+                        <div class="card-location">Goa Beaches</div>
+                        <div class="card-rating"><i class="fas fa-star"></i> 4.94</div>
+                    </div>
+                    <div class="card-details">Sun, sand & nightlife</div>
+                    <div class="card-dates">5 nights · Dec 20 – 25</div>
+                    <div class="card-price"><strong>₹24,999</strong> per person</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1627938823193-fd13c1c867dd?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Varanasi" class="card-image">
+                    <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                </div>
+                <div class="card-info">
+                    <div class="card-header">
+                        <div class="card-location">Varanasi, Uttar Pradesh</div>
+                        <div class="card-rating"><i class="fas fa-star"></i> 4.86</div>
+                    </div>
+                    <div class="card-details">Spiritual capital & Ganges</div>
+                    <div class="card-dates">3 nights · Dec 7 – 10</div>
+                    <div class="card-price"><strong>₹11,999</strong> per person</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=400&q=75" alt="Rishikesh" class="card-image">
+                    <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                    <div class="card-badge">Yoga & Adventure</div>
+                </div>
+                <div class="card-info">
+                    <div class="card-header">
+                        <div class="card-location">Rishikesh, Uttarakhand</div>
+                        <div class="card-rating"><i class="fas fa-star"></i> 4.90</div>
+                    </div>
+                    <div class="card-details">River rafting & yoga retreat</div>
+                    <div class="card-dates">4 nights · Dec 14 – 18</div>
+                    <div class="card-price"><strong>₹14,999</strong> per person</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.pexels.com/photos/18526644/pexels-photo-18526644.jpeg" alt="Udaipur" class="card-image">
+                    <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                    <div class="card-badge">Royal Experience</div>
+                </div>
+                <div class="card-info">
+                    <div class="card-header">
+                        <div class="card-location">Udaipur, Rajasthan</div>
+                        <div class="card-rating"><i class="fas fa-star"></i> 4.96</div>
+                    </div>
+                    <div class="card-details">City of lakes & palaces</div>
+                    <div class="card-dates">5 nights · Dec 10 – 15</div>
+                    <div class="card-price"><strong>₹28,999</strong> per person</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose" id="why-choose">
+        <div class="why-choose-container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose Wanderlust India?</h2>
+                <p class="section-subtitle">Your trusted partner for unforgettable Indian adventures</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Safe & Secure</h3>
+                    <p class="feature-description">100% secure bookings with verified accommodations and 24/7 traveler support throughout your journey.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3 class="feature-title">Expert Itineraries</h3>
+                    <p class="feature-description">Curated travel plans by local experts who know India inside out. Skip the tourist traps, find hidden gems.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3 class="feature-title">Best Price Guarantee</h3>
+                    <p class="feature-description">Competitive pricing with transparent costs. No hidden fees, just honest deals and maximum value.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Local Connections</h3>
+                    <p class="feature-description">Experience India through the eyes of locals. Authentic cultural interactions and insider access.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3 class="feature-title">Flexible Bookings</h3>
+                    <p class="feature-description">Life happens! Enjoy flexible cancellation policies and easy rescheduling options for peace of mind.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">24/7 Support</h3>
+                    <p class="feature-description">Round-the-clock assistance in multiple languages. We're here whenever you need us, wherever you are.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <h2 class="section-title">What Our Travelers Say</h2>
+            <p class="section-subtitle">Real stories from real adventures</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Absolutely incredible experience! The team arranged everything perfectly. From the houseboat in Kerala to the mountain treks, every moment was magical. Will definitely book again!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">PR</div>
+                    <div class="author-info">
+                        <h4>Priya Sharma</h4>
+                        <p>Kerala & Tamil Nadu Tour</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Best travel agency in India hands down! They understood exactly what we wanted - adventure mixed with culture. Ladakh was breathtaking and the guides were phenomenal."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">RK</div>
+                    <div class="author-info">
+                        <h4>Rahul Kumar</h4>
+                        <p>Ladakh Adventure Package</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "As a solo female traveler, I felt completely safe. The accommodations were vetted, transfers smooth, and the support team checked in regularly. India exceeded all expectations!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AM</div>
+                    <div class="author-info">
+                        <h4>Anjali Mehta</h4>
+                        <p>Rajasthan Heritage Tour</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2>Get Travel Inspiration</h2>
+            <p>Subscribe to our newsletter for exclusive deals, travel tips, and destination guides</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ABOUT WANDERLUST</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Awards</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>SUPPORT</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Cancellation Policy</a></li>
+                    <li><a href="#">Travel Insurance</a></li>
+                    <li><a href="#">Safety Guidelines</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>DESTINATIONS</h3>
+                <ul>
+                    <li><a href="#">North India</a></li>
+                    <li><a href="#">South India</a></li>
+                    <li><a href="#">Beaches</a></li>
+                    <li><a href="#">Mountains</a></li>
+                    <li><a href="#">Wildlife</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>CONNECT</h3>
+                <ul>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Travel Guides</a></li>
+                    <li><a href="#">Partner With Us</a></li>
+                    <li><a href="#">Affiliate Program</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-legal">
+                <span>© 2024 Wanderlust India. All Rights Reserved.</span>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Sitemap</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Background Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        setInterval(nextSlide, 4000);
+
+        // Favorite Buttons
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    icon.style.color = 'var(--primary-red)';
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    icon.style.color = '';
+                }
+            });
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header Shadow on Scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.style.boxShadow = '0 2px 12px rgba(0,0,0,0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+            }
+        });
+
+        // Newsletter Form
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing! Check your email for exclusive deals.');
+            this.reset();
+        });
+    </script>
+</body>
+</html> 
